@@ -1,0 +1,102 @@
+// implicit binding
+// explicit binding
+// new binding
+// window binding
+
+// Implicit Binding
+// যদি কোন জায়াগায়  ফাংশন কল করা হয় । যদি ফাংশনের  সাথে ডট(.) নোটেশন থাকে , অই ডট এর ঠিক বাম পাশে যে অবেজেক্ট থাকে
+// তাকে  this  বুঝানো হয়
+let masrafi = {
+  name: "Masrabin mortoja",
+  age: 35,
+  printPlayerName: function () {
+    console.log(this.name);
+    console.log(this);
+  },
+};
+
+masrafi.printPlayerName();
+
+const player1 = {
+  name: "masrafi",
+  age: 35,
+};
+
+const player2 = {
+  name: "tamim",
+  age: 36,
+};
+
+function printName(obj) {
+  obj.printPlayerName = function () {
+    console.log(this.name);
+  };
+}
+
+printName(player1);
+printName(player2);
+
+player1.printPlayerName();
+player2.printPlayerName();
+
+const makingPlayer = () => {
+  return {
+    name: "Abdul razzak",
+    age: 40,
+    printPlayerName: function () {
+      console.log(this.name);
+    },
+  };
+};
+
+const player = makingPlayer();
+player.printPlayerName();
+
+//============================================================================
+
+// explicit binding কোনো একটি ফাংশন কে  কোন একটি অবজেক্ট দিয়ে  কল করাকে বোঝায়
+// এক্ষেত্রে  call() , bind() , apply এগুলো ব্যবহৃত হয়ে থাকে
+// তিনটি  ফাংশনের প্রথম প্যারামিটার হল , একটি অবজক্ট ।
+// এখানে প্যারামিটার হিসেবে ডিরেক্ট কোন একটি অবজেক্টকে অথবা this  //দ্বারা কোন একটি অবজেক্টকে বোঝানো হয় ।
+// call() = একটি করে ভ্যালু নিয়ে থাকে
+// bind() =   একটি করে ভ্যালু নিয়ে থাকে , তবে  ফাংশনকে ডিরেক্ট কল না করে ফাংশন এর একটি instance  make করে
+// apply()=  ভ্যালু এর একটি অ্যারে নিয়ে থাকে ।
+
+let player3 = {
+  name: "masrafi",
+  age: 35,
+};
+
+let printPlayer3 = function () {
+  console.log(` ${this.name} is ${v1} , ${v2} , ${v3} `);
+};
+
+let v1 = "hand some";
+let v2 = "shakib";
+let v3 = "Best player";
+
+printPlayer3.call(player3, v1, v2, v3);
+
+// new  binding ()
+// কোনো একটি ফাংশনকে  যখন new  দ্বারা  কল করা হয়  তখন সেই ফাংশনটির ভিতর নামে একটি অবজেক্ট তৈরি হয় ,
+// এবং সেই অবজেক্টটিকে ফাংশনটি রিটার্ন করে
+
+function Person(name, age) {
+  // this = Object.create(null)
+  (this.name = name), (this.age = age);
+
+  // return this
+}
+
+const p1 = new Person("nayan", 12);
+console.log(p1);
+
+// ========================================
+
+// window binding
+
+function WindowBinding() {
+  console.log(this);
+}
+
+WindowBinding();
